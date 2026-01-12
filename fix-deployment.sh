@@ -32,3 +32,4 @@ aws elasticbeanstalk update-environment \
 echo "Deployment initiated. Check AWS Console for progress."
 echo "You can monitor with: aws elasticbeanstalk describe-events --environment-name Emoji-tester-env --region us-east-1 --max-items 10"
 
+

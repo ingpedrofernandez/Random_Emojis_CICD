@@ -21,3 +21,4 @@ docker login
 
 # Push image
 docker push yourusername/imagename:tag # add tag if you have one, if none it will default to lastest tag
+
