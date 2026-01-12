@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-buildx-
 
     - name: Build with Docker Compose
-      run: docker-compose -f docker-compose.yml build
+      run: docker compose -f docker-compose.yml build
 
     - name: Generate deployment package
       run: zip -r deploy.zip . -x '*.git*'
