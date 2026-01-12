@@ -62,6 +62,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
       run: |
         IMAGE_URI="$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        # Update Dockerrun.aws.json with ECR image
         sed -i "s|IMAGE_PLACEHOLDER|$IMAGE_URI|g" Dockerrun.aws.json
         zip -r deploy.zip . -x '*.git*' 'venv/*' '*.pyc' '__pycache__/*' '.github/*'
     

@@ -1,8 +1,9 @@
 {
-  "AWSEBDockerrunVersion": 2,
+  "AWSEBDockerrunVersion": "3",
+  "volumes": [],
   "containerDefinitions": [
     {
-      "name": "emoji-frontend",
+      "name": "web",
       "image": "IMAGE_PLACEHOLDER",
       "essential": true,
       "memory": 512,
