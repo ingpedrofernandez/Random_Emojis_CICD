@@ -66,6 +66,18 @@ jobs:
         sed -i "s|IMAGE_PLACEHOLDER|$IMAGE_URI|g" Dockerrun.aws.json
         zip -r deploy.zip . -x '*.git*' 'venv/*' '*.pyc' '__pycache__/*' '.github/*'
     
+    - name: Check environment status before deployment
+      run: |
+        ENV_STATUS=$(aws elasticbeanstalk describe-environments \
+          --environment-names Emoji-tester-env \
+          --region us-east-1 \
+          --query 'Environments[0].Status' \
+          --output text)
+        echo "Current environment status: $ENV_STATUS"
+        if [ "$ENV_STATUS" != "Ready" ] && [ "$ENV_STATUS" != "Ok" ]; then
+          echo "Warning: Environment is in $ENV_STATUS state. Deployment may fail."
+        fi
+
     - name: Deploy to Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v21
       with:
@@ -76,3 +88,4 @@ jobs:
         environment_name: Emoji-tester-env
         version_label: ${{ github.run_number }}-${{ github.sha }}
         deployment_package: deploy.zip
+        wait_for_deployment: true
